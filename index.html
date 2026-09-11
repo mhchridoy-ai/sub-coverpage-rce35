@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cover Page Generator - Southern University Bangladesh</title>
+<style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f1f5f9; color: #1e293b; }
+    .container { display: flex; gap: 20px; padding: 20px; max-width: 1400px; margin: 0 auto; }
+    .form-section { flex: 1; background: #ffffff; padding: 20px 25px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.08); max-height: 90vh; overflow-y: auto; }
+    .form-section h2 { margin-top: 0; color: #003366; font-size: 18pt; border-bottom: 2px solid #003366; padding-bottom: 8px; }
+    .form-group { margin-bottom: 12px; }
+    .form-group label { display: block; font-weight: bold; margin-bottom: 4px; font-size: 11pt; color: #334155; }
+    .form-group input, .form-group select { width: 100%; padding: 8px 10px; border: 1px solid #cbd5e1; border-radius: 5px; box-sizing: border-box; font-size: 10pt; background-color: #fff; }
+    .form-group input:focus, .form-group select:focus { border-color: #003366; outline: none; }
+    .section-title { font-size: 12pt; color: #003366; margin-top: 18px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: bold; }
+    .btn-print { width: 100%; background-color: #003366; color: #ffffff; padding: 12px; border: none; border-radius: 6px; font-size: 12pt; font-weight: bold; cursor: pointer; margin-top: 15px; transition: background 0.2s; }
+    .btn-print:hover { background-color: #002244; }
+
+    .preview-section { flex: 1.2; display: flex; justify-content: center; }
+    .a4-page { width: 210mm; min-height: 297mm; background: #ffffff; padding: 20mm; box-shadow: 0 4px 15px rgba(0,0,0,0.15); box-sizing: border-box; font-family: 'Times New Roman', Times, serif; }
+
+    .header { text-align: center; border-bottom: 2px solid #003366; padding-bottom: 15px; }
+    
+    /* সেন্টারে লোগো সাজানো এবং ডিভাইডার লাইনের স্টাইল */
+    .logo-container { display: flex; justify-content: center; align-items: center; gap: 25px; margin-bottom: 15px; }
+    .logo { width: 90px; height: 90px; object-fit: contain; }
+    .logo-divider { width: 2px; height: 65px; background-color: #003366; }
+
+    .header h1 { margin: 5px 0; font-size: 20pt; color: #003366; text-transform: uppercase; }
+    .header h2 { margin: 3px 0; font-size: 14pt; font-weight: normal; }
+    .header h3 { margin: 3px 0; font-size: 12pt; color: #555; }
+    .assignment-info { margin-top: 30px; text-align: center; }
+    .assignment-no { font-size: 13pt; font-weight: bold; margin-bottom: 12px; }
+    .assignment-title-box { border: 1.5px solid #003366; padding: 14px 20px; display: block; width: 100%; background-color: #f8fafc; box-sizing: border-box; border-radius: 4px; }
+    .assignment-title-header { font-size: 11pt; font-weight: bold; color: #003366; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+    .assignment-title-val { font-weight: bold; font-size: 18pt; color: #0f172a; line-height: 1.3; }
+    .section-grid { margin-top: 30px; display: flex; flex-direction: column; gap: 20px; }
+    .box { width: 100%; border: 1.5px solid #003366; padding: 18px 22px; box-sizing: border-box; border-radius: 4px; }
+    .box h4 { margin-top: 0; border-bottom: 1.5px solid #003366; padding-bottom: 8px; color: #003366; font-size: 14pt; text-transform: uppercase; letter-spacing: 0.5px; }
+    .box p { margin: 10px 0; font-size: 13.5pt; line-height: 1.6; }
+
+    @media print {
+        @page { size: A4; margin: 0; }
+        body { background: none; margin: 0; }
+        .form-section { display: none !important; }
+        .container { padding: 0; margin: 0; display: block; width: 100%; }
+        .preview-section { display: block; width: 100%; }
+        .a4-page { box-shadow: none; width: 100%; min-height: 100vh; padding: 20mm 18mm; box-sizing: border-box; }
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="form-section">
+        <h2>কভার পেইজ কাস্টমাইজ করুন</h2>
+        
+        <div class="form-group">
+            <label>Document Type:</label>
+            <select id="in-type" onchange="updateCover()">
+                <option value="Assignment">Assignment</option>
+                <option value="Lab Report">Lab Report</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label id="in-no-label">Assignment No:</label>
+            <input type="text" id="in-no" value="01" oninput="updateCover()">
+        </div>
+        <div class="form-group">
+            <label id="in-title-label">Assignment Title:</label>
+            <input type="text" id="in-title" value="An assignment on Computer Aided Drawing" oninput="updateCover()">
+        </div>
+        
+        <div class="section-title">Submitted By</div>
+        <div class="form-group">
+            <label>Student Name:</label>
+            <input type="text" id="in-sname" value="Muhammad Mobinul Hoque Chowdhury" oninput="updateCover()">
+        </div>
+        <div class="form-group">
+            <label>Student ID:</label>
+            <input type="text" id="in-sid" value="030-35-10" oninput="updateCover()">
+        </div>
+        <div class="form-group">
+            <label>Batch:</label>
+            <input type="text" id="in-batch" value="RCE-35" oninput="updateCover()">
+        </div>
+        <div class="form-group">
+            <label>Group:</label>
+            <input type="text" id="in-group" value="A" oninput="updateCover()">
+        </div>
+        <div class="form-group">
+            <label>Semester:</label>
+            <input type="text" id="in-semester" value="Fall 2026" oninput="updateCover()">
+        </div>
+
+        <div class="section-title">Submitted To</div>
+        <div class="form-group">
+            <label>Teacher's Name:</label>
+            <input type="text" id="in-tname" value="Umma Salma" oninput="updateCover()">
+        </div>
+        <div class="form-group">
+            <label>Course Title:</label>
+            <input type="text" id="in-ctitle" value="Computer Aided Drawing" oninput="updateCover()">
+        </div>
+        <div class="form-group">
+            <label>Date of Submission:</label>
+            <input type="text" id="in-date" value="25 / 10 / 2026" oninput="updateCover()">
+        </div>
+
+        <button class="btn-print" onclick="window.print()">Save as PDF / Print</button>
+    </div>
+
+    <div class="preview-section">
+        <div class="a4-page">
+            <div class="logo-container">
+                <!-- ভার্সিটির লোগো (বামে) -->
+                <img src="https://github.com/mhchridoy-ai/sub-coverpage-rce35/blob/main/SUB-logo.png?raw=true" alt="Varsity Logo" class="logo" onerror="this.src='https://via.placeholder.com/90?text=Varsity+Logo'">
+                
+                <!-- মাঝের ডিভাইডার লাইন -->
+                <div class="logo-divider"></div>
+                
+                <!-- ব্যাচ লোগো (ডানে) -->
+                <img src="https://github.com/mhchridoy-ai/sub-coverpage-rce35/blob/main/RCE-35-official-logo-S-designed-by-MHC-Hridoy.png?raw=true" alt="Batch Logo" class="logo" onerror="this.src='https://via.placeholder.com/90?text=Batch+Logo'">
+            </div>
+
+            <div class="header">
+                <h1>Southern University Bangladesh</h1>
+                <h2>Department of Civil Engineering</h2>
+                <h3>Batch: <span id="out-batch-hdr">RCE-35</span></h3>
+            </div>
+
+            <div class="assignment-info">
+                <div class="assignment-no"><span id="out-no-label">ASSIGNMENT NO</span>: <span id="out-no">01</span></div>
+                <div class="assignment-title-box">
+                    <div class="assignment-title-header" id="out-title-header">ASSIGNMENT TITLE</div>
+                    <div class="assignment-title-val" id="out-title">An assignment on Computer Aided Drawing</div>
+                </div>
+            </div>
+
+            <div class="section-grid">
+                <div class="box">
+                    <h4>Submitted By</h4>
+                    <p><strong>Name:</strong> <span id="out-sname">Muhammad Mobinul Hoque Chowdhury</span></p>
+                    <p><strong>Student ID:</strong> <span id="out-sid">030-35-10</span></p>
+                    <p><strong>Batch:</strong> <span id="out-batch">RCE-35</span></p>
+                    <p><strong>Group:</strong> <span id="out-group">A</span></p>
+                    <p><strong>Semester:</strong> <span id="out-semester">Fall 2026</span></p>
+                </div>
+
+                <div class="box">
+                    <h4>Submitted To</h4>
+                    <p><strong>Teacher's Name:</strong> <span id="out-tname">Umma Salma</span></p>
+                    <p><strong>Department:</strong> Civil Engineering</p>
+                    <p><strong>Course Title:</strong> <span id="out-ctitle">Computer Aided Drawing</span></p>
+                    <p><strong>Date of Submission:</strong> <span id="out-date">25 / 10 / 2026</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function updateCover() {
+        var docType = document.getElementById('in-type').value;
+
+        if (docType === "Lab Report") {
+            document.getElementById('in-no-label').innerText = "Lab Report No / Experiment No:";
+            document.getElementById('in-title-label').innerText = "Lab Report Title:";
+            document.getElementById('out-no-label').innerText = "LAB REPORT NO";
+            document.getElementById('out-title-header').innerText = "LAB REPORT TITLE";
+        } else {
+            document.getElementById('in-no-label').innerText = "Assignment No:";
+            document.getElementById('in-title-label').innerText = "Assignment Title:";
+            document.getElementById('out-no-label').innerText = "ASSIGNMENT NO";
+            document.getElementById('out-title-header').innerText = "ASSIGNMENT TITLE";
+        }
+
+        document.getElementById('out-no').innerText = document.getElementById('in-no').value;
+        document.getElementById('out-title').innerText = document.getElementById('in-title').value;
+        
+        document.getElementById('out-sname').innerText = document.getElementById('in-sname').value;
+        document.getElementById('out-sid').innerText = document.getElementById('in-sid').value;
+        document.getElementById('out-batch').innerText = document.getElementById('in-batch').value;
+        document.getElementById('out-batch-hdr').innerText = document.getElementById('in-batch').value;
+        document.getElementById('out-group').innerText = document.getElementById('in-group').value;
+        document.getElementById('out-semester').innerText = document.getElementById('in-semester').value;
+
+        document.getElementById('out-tname').innerText = document.getElementById('in-tname').value;
+        document.getElementById('out-ctitle').innerText = document.getElementById('in-ctitle').value;
+        document.getElementById('out-date').innerText = document.getElementById('in-date').value;
+    }
+</script>
+
+</body>
+</html>
