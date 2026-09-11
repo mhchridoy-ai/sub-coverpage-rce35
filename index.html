@@ -35,11 +35,15 @@
     .assignment-no { font-size: 13pt; font-weight: bold; margin-bottom: 12px; }
     .assignment-title-box { border: 1.5px solid #003366; padding: 14px 20px; display: block; width: 100%; background-color: #f8fafc; box-sizing: border-box; border-radius: 4px; }
     .assignment-title-header { font-size: 11pt; font-weight: bold; color: #003366; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
-    .assignment-title-val { font-weight: bold; font-size: 18pt; color: #0f172a; line-height: 1.3; }
+    
+    /* টাইটেল ডায়নামিক ও ফাঁকা থাকলে ৩ লাইনের সমপরিমাণ স্পেস */
+    .assignment-title-val { font-weight: bold; font-size: 18pt; color: #0f172a; line-height: 1.3; word-break: break-word; }
+    .assignment-title-val.empty-title { min-height: 3.9em; display: block; }
+
     .section-grid { margin-top: 30px; display: flex; flex-direction: column; gap: 20px; }
     .box { width: 100%; border: 1.5px solid #003366; padding: 18px 22px; box-sizing: border-box; border-radius: 4px; }
     .box h4 { margin-top: 0; border-bottom: 1.5px solid #003366; padding-bottom: 8px; color: #003366; font-size: 14pt; text-transform: uppercase; letter-spacing: 0.5px; }
-    .box p { margin: 10px 0; font-size: 13.5pt; line-height: 1.6; }
+    .box p { margin: 10px 0; font-size: 13.5pt; line-height: 1.6; min-height: 1.6em; }
 
     /* মোবাইল ভিউ রেসপন্সিভ ফিক্স */
     @media (max-width: 900px) {
@@ -64,7 +68,7 @@
     }
 </style>
 </head>
-<body>
+<body onload="updateCover()">
 
 <div class="container">
     <div class="form-section">
@@ -80,21 +84,21 @@
 
         <div class="form-group">
             <label id="in-no-label">Assignment No:</label>
-            <input type="text" id="in-no" value="01" oninput="updateCover()">
+            <input type="text" id="in-no" placeholder="e.g. 01" oninput="updateCover()">
         </div>
         <div class="form-group">
             <label id="in-title-label">Assignment Title:</label>
-            <input type="text" id="in-title" value="An assignment on Computer Aided Drawing" oninput="updateCover()">
+            <input type="text" id="in-title" placeholder="Enter title here..." oninput="updateCover()">
         </div>
         
         <div class="section-title">Submitted By</div>
         <div class="form-group">
             <label>Student Name:</label>
-            <input type="text" id="in-sname" value="Muhammad Mobinul Hoque Chowdhury" oninput="updateCover()">
+            <input type="text" id="in-sname" placeholder="e.g. MHC Hridoy" oninput="updateCover()">
         </div>
         <div class="form-group">
             <label>Student ID:</label>
-            <input type="text" id="in-sid" value="030-35-10" oninput="updateCover()">
+            <input type="text" id="in-sid" placeholder="e.g. 030-35-10" oninput="updateCover()">
         </div>
         <div class="form-group">
             <label>Batch:</label>
@@ -102,25 +106,25 @@
         </div>
         <div class="form-group">
             <label>Group:</label>
-            <input type="text" id="in-group" value="A" oninput="updateCover()">
+            <input type="text" id="in-group" placeholder="e.g. A" oninput="updateCover()">
         </div>
         <div class="form-group">
             <label>Semester:</label>
-            <input type="text" id="in-semester" value="Fall 2026" oninput="updateCover()">
+            <input type="text" id="in-semester" placeholder="e.g. Fall 2026" oninput="updateCover()">
         </div>
 
         <div class="section-title">Submitted To</div>
         <div class="form-group">
             <label>Teacher's Name:</label>
-            <input type="text" id="in-tname" value="Umma Salma" oninput="updateCover()">
+            <input type="text" id="in-tname" placeholder="Enter teacher name" oninput="updateCover()">
         </div>
         <div class="form-group">
             <label>Course Title:</label>
-            <input type="text" id="in-ctitle" value="Computer Aided Drawing" oninput="updateCover()">
+            <input type="text" id="in-ctitle" placeholder="Enter course title" oninput="updateCover()">
         </div>
         <div class="form-group">
             <label>Date of Submission:</label>
-            <input type="text" id="in-date" value="25 / 10 / 2026" oninput="updateCover()">
+            <input type="text" id="in-date" placeholder="DD / MM / YYYY" oninput="updateCover()">
         </div>
 
         <button class="btn-print" onclick="window.print()">Save as PDF / Print</button>
@@ -141,29 +145,29 @@
             </div>
 
             <div class="assignment-info">
-                <div class="assignment-no"><span id="out-no-label">ASSIGNMENT NO</span>: <span id="out-no">01</span></div>
+                <div class="assignment-no"><span id="out-no-label">ASSIGNMENT NO</span>: <span id="out-no"></span></div>
                 <div class="assignment-title-box">
                     <div class="assignment-title-header" id="out-title-header">ASSIGNMENT TITLE</div>
-                    <div class="assignment-title-val" id="out-title">An assignment on Computer Aided Drawing</div>
+                    <div class="assignment-title-val empty-title" id="out-title"></div>
                 </div>
             </div>
 
             <div class="section-grid">
                 <div class="box">
                     <h4>Submitted By</h4>
-                    <p><strong>Name:</strong> <span id="out-sname">Muhammad Mobinul Hoque Chowdhury</span></p>
-                    <p><strong>Student ID:</strong> <span id="out-sid">030-35-10</span></p>
+                    <p><strong>Name:</strong> <span id="out-sname"></span></p>
+                    <p><strong>Student ID:</strong> <span id="out-sid"></span></p>
                     <p><strong>Batch:</strong> <span id="out-batch">RCE-35</span></p>
-                    <p><strong>Group:</strong> <span id="out-group">A</span></p>
-                    <p><strong>Semester:</strong> <span id="out-semester">Fall 2026</span></p>
+                    <p><strong>Group:</strong> <span id="out-group"></span></p>
+                    <p><strong>Semester:</strong> <span id="out-semester"></span></p>
                 </div>
 
                 <div class="box">
                     <h4>Submitted To</h4>
-                    <p><strong>Teacher's Name:</strong> <span id="out-tname">Umma Salma</span></p>
+                    <p><strong>Teacher's Name:</strong> <span id="out-tname"></span></p>
                     <p><strong>Department:</strong> Civil Engineering</p>
-                    <p><strong>Course Title:</strong> <span id="out-ctitle">Computer Aided Drawing</span></p>
-                    <p><strong>Date of Submission:</strong> <span id="out-date">25 / 10 / 2026</span></p>
+                    <p><strong>Course Title:</strong> <span id="out-ctitle"></span></p>
+                    <p><strong>Date of Submission:</strong> <span id="out-date"></span></p>
                 </div>
             </div>
         </div>
@@ -186,9 +190,17 @@
             document.getElementById('out-title-header').innerText = "ASSIGNMENT TITLE";
         }
 
+        var titleValue = document.getElementById('in-title').value;
+        var outTitleElem = document.getElementById('out-title');
+        outTitleElem.innerText = titleValue;
+
+        if (titleValue.trim() === "") {
+            outTitleElem.classList.add('empty-title');
+        } else {
+            outTitleElem.classList.remove('empty-title');
+        }
+
         document.getElementById('out-no').innerText = document.getElementById('in-no').value;
-        document.getElementById('out-title').innerText = document.getElementById('in-title').value;
-        
         document.getElementById('out-sname').innerText = document.getElementById('in-sname').value;
         document.getElementById('out-sid').innerText = document.getElementById('in-sid').value;
         document.getElementById('out-batch').innerText = document.getElementById('in-batch').value;
