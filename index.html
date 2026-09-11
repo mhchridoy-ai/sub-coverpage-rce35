@@ -11,10 +11,10 @@
     .form-section h2 { margin-top: 0; color: #003366; font-size: 18pt; border-bottom: 2px solid #003366; padding-bottom: 8px; }
     .form-group { margin-bottom: 12px; }
     .form-group label { display: block; font-weight: bold; margin-bottom: 4px; font-size: 11pt; color: #334155; }
-    .form-group input, .form-group select { width: 100%; padding: 8px 10px; border: 1px solid #cbd5e1; border-radius: 5px; box-sizing: border-box; font-size: 10pt; background-color: #fff; }
+    .form-group input, .form-group select { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 5px; box-sizing: border-box; font-size: 11pt; background-color: #fff; }
     .form-group input:focus, .form-group select:focus { border-color: #003366; outline: none; }
     .section-title { font-size: 12pt; color: #003366; margin-top: 18px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: bold; }
-    .btn-print { width: 100%; background-color: #003366; color: #ffffff; padding: 12px; border: none; border-radius: 6px; font-size: 12pt; font-weight: bold; cursor: pointer; margin-top: 15px; transition: background 0.2s; }
+    .btn-print { width: 100%; background-color: #003366; color: #ffffff; padding: 14px; border: none; border-radius: 6px; font-size: 12pt; font-weight: bold; cursor: pointer; margin-top: 15px; transition: background 0.2s; }
     .btn-print:hover { background-color: #002244; }
 
     .preview-section { flex: 1.2; display: flex; justify-content: center; }
@@ -22,10 +22,11 @@
 
     .header { text-align: center; border-bottom: 2px solid #003366; padding-bottom: 15px; }
     
-    /* সেন্টারে লোগো সাজানো এবং ডিভাইডার লাইনের স্টাইল */
     .logo-container { display: flex; justify-content: center; align-items: center; gap: 25px; margin-bottom: 15px; }
     .logo { width: 90px; height: 90px; object-fit: contain; }
-    .logo-divider { width: 2px; height: 65px; background-color: #003366; }
+    
+    /* প্রিন্ট সেফ ডিভাইডার লাইন */
+    .logo-divider { width: 0; height: 65px; border-left: 2px solid #003366; }
 
     .header h1 { margin: 5px 0; font-size: 20pt; color: #003366; text-transform: uppercase; }
     .header h2 { margin: 3px 0; font-size: 14pt; font-weight: normal; }
@@ -40,13 +41,26 @@
     .box h4 { margin-top: 0; border-bottom: 1.5px solid #003366; padding-bottom: 8px; color: #003366; font-size: 14pt; text-transform: uppercase; letter-spacing: 0.5px; }
     .box p { margin: 10px 0; font-size: 13.5pt; line-height: 1.6; }
 
+    /* মোবাইল ভিউ রেসপন্সিভ ফিক্স */
+    @media (max-width: 900px) {
+        .container { flex-direction: column; padding: 10px; }
+        .form-section { max-height: none; width: 100%; box-sizing: border-box; }
+        .preview-section { width: 100%; overflow-x: auto; }
+        .a4-page { width: 210mm; margin: 0 auto; transform: scale(0.95); transform-origin: top center; }
+    }
+
+    /* প্রিন্ট ও পিডিএফ ব্যাকগ্রাউন্ড কালার ফিক্স */
     @media print {
+        * {
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+        }
         @page { size: A4; margin: 0; }
         body { background: none; margin: 0; }
         .form-section { display: none !important; }
         .container { padding: 0; margin: 0; display: block; width: 100%; }
         .preview-section { display: block; width: 100%; }
-        .a4-page { box-shadow: none; width: 100%; min-height: 100vh; padding: 20mm 18mm; box-sizing: border-box; }
+        .a4-page { box-shadow: none; width: 100%; min-height: 100vh; padding: 20mm 18mm; box-sizing: border-box; transform: none; }
     }
 </style>
 </head>
@@ -115,13 +129,8 @@
     <div class="preview-section">
         <div class="a4-page">
             <div class="logo-container">
-                <!-- ভার্সিটির লোগো (বামে) -->
                 <img src="https://github.com/mhchridoy-ai/sub-coverpage-rce35/blob/main/SUB-logo.png?raw=true" alt="Varsity Logo" class="logo" onerror="this.src='https://via.placeholder.com/90?text=Varsity+Logo'">
-                
-                <!-- মাঝের ডিভাইডার লাইন -->
                 <div class="logo-divider"></div>
-                
-                <!-- ব্যাচ লোগো (ডানে) -->
                 <img src="https://github.com/mhchridoy-ai/sub-coverpage-rce35/blob/main/RCE-35-official-logo-S-designed-by-MHC-Hridoy.png?raw=true" alt="Batch Logo" class="logo" onerror="this.src='https://via.placeholder.com/90?text=Batch+Logo'">
             </div>
 
