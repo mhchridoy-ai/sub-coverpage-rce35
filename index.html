@@ -119,6 +119,10 @@
             <input type="text" id="in-tname" placeholder="Enter teacher name" oninput="updateCover()">
         </div>
         <div class="form-group">
+            <label>Department:</label>
+            <input type="text" id="in-tdept" placeholder="Enter department" oninput="updateCover()">
+        </div>
+        <div class="form-group">
             <label>Course Title:</label>
             <input type="text" id="in-ctitle" placeholder="Enter course title" oninput="updateCover()">
         </div>
@@ -165,8 +169,8 @@
                 <div class="box">
                     <h4>Submitted To</h4>
                     <p><strong>Teacher's Name:</strong> <span id="out-tname"></span></p>
-                    <p><strong>Department:</strong> Civil Engineering</p>
-                    <p><strong>Course Title:</strong> <span id="out-ctitle"></span></p>
+                    <p><strong>Department:</strong> <span id="out-tdept"></span></p>
+                    <p><strong>Course Title:</strong> <span id="out-ctitle" style="font-weight: bold; font-size: 14.5pt;"></span></p>
                     <p><strong>Date of Submission:</strong> <span id="out-date"></span></p>
                 </div>
             </div>
@@ -209,6 +213,7 @@
         document.getElementById('out-semester').innerText = document.getElementById('in-semester').value;
 
         document.getElementById('out-tname').innerText = document.getElementById('in-tname').value;
+        document.getElementById('out-tdept').innerText = document.getElementById('in-tdept').value;
         document.getElementById('out-ctitle').innerText = document.getElementById('in-ctitle').value;
         document.getElementById('out-date').innerText = document.getElementById('in-date').value;
     }
